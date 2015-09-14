@@ -43,3 +43,9 @@ function draw() {
   if (useThisX < 0) useThisX = 0;
   ellipse(mouseX, useThisY, 5,5);
 }
+
+function keyReleased()
+{
+  if(key==' ') background(0);;
+
+}
