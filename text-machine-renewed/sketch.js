@@ -29,7 +29,7 @@ function setup() {
 }
 var idx = 0;
 // store words here
-var writtenwords = {};
+var writtenwords = [];
 
 function draw() {
   background(255);
@@ -38,17 +38,32 @@ function draw() {
   fill(0)
   var tempx = 20;
   var tempy = 30;
-  for (var word in writtenwords)
-  {
-    tempx = writtenwords[word][0];
-    tempy = writtenwords[word][1];
-    text(word, tempx, tempy);
+  if (writtenwords){
+    for (var i = 0; i < writtenwords.length; i++)
+    {
+      tempx = writtenwords[i].xpos;
+      tempy = writtenwords[i].ypos;
+      text(writtenwords[i].word, tempx, tempy);
+    }
   }
   
   fill(255,0,0);
   text(thecurrentword, xpos, ypos);
-  writtenwords[thecurrentword + ' '] = [xpos,ypos];
+  // writtenwords[thecurrentword + ' '] = [xpos,ypos];
+  writtenwords.push({idx : idx,
+        word : thecurrentword + ' ',
+      xpos : xpos,
+      ypos : ypos});
+    idx++;
   xpos = xpos + textWidth(thecurrentword + ' ');
+  /*
+    .push(
+      word : thecurrentword + ' ',
+      xpos : xpos,
+      ypos : ypos,
+      idx : idx
+    );
+  */
   if(xpos>width/3)
   {
     xpos = 20;
@@ -57,7 +72,8 @@ function draw() {
   if(ypos>height) {
     background(255);
     ypos = 30;
-    writtenwords = {};
+    writtenwords = [];
+    idx = 0;
   }
   thecurrentword = pickword(thecurrentword);
 }
