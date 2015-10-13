@@ -40,17 +40,14 @@ function draw() {
   var tempy = 30;
   for (var word in writtenwords)
   {
+    tempx = writtenwords[word][0];
+    tempy = writtenwords[word][1];
     text(word, tempx, tempy);
-    if(tempx>width/3)
-    {
-      tempx = 20;
-      tempy = tempy + 36;
-    }
-    tempx += textWidth(word);
   }
   
   fill(255,0,0);
   text(thecurrentword, xpos, ypos);
+  writtenwords[thecurrentword + ' '] = [xpos,ypos];
   xpos = xpos + textWidth(thecurrentword + ' ');
   if(xpos>width/3)
   {
@@ -61,10 +58,7 @@ function draw() {
     background(255);
     ypos = 30;
     writtenwords = {};
-    idx = 0;
   }
-  writtenwords = [thecurrentword + ' '];
-  idx += 1;
   thecurrentword = pickword(thecurrentword);
 }
 
